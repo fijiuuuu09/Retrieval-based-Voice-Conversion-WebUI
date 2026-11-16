@@ -312,7 +312,10 @@ class SineGen(torch.nn.Module):
         )
         rad2 = torch.fmod(rad[..., -1:].float() + 0.5, 1.0) - 0.5
         rad_acc = rad2.cumsum(dim=1).fmod(1.0).to(f0)
-        rad += F.pad(rad_acc, (0, 0, 1, -1))
+        rad_acc_shifted = torch.cat(
+            (torch.zeros_like(rad_acc[:, :1]), rad_acc[:, :-1]), dim=1
+        )
+        rad += rad_acc_shifted
         rad = rad.reshape(f0.shape[0], -1, 1)
         rad = torch.multiply(
             rad,

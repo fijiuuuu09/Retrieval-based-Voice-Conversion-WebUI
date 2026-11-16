@@ -1,0 +1,12 @@
+.venv/
+**/__pycache__/
+*.py[cod]
+weights/
+logs/
+assets/hubert/
+assets/hubert_base/
+assets/rmvpe/
+assets/pretrained/
+assets/pretrained_v2/
+assets/indices/
+TEMP/
